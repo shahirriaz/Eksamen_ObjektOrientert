@@ -18,26 +18,14 @@ public class Equipment {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getLocation() {
         return location;
     }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
 
     public String getTypeOfEquipment() {
         return typeOfEquipment;
     }
 
-    public void setTypeOfEquipment(String typeOfEquipment) {
-        this.typeOfEquipment = typeOfEquipment;
-    }
 
     public boolean isMustBeChanged() {
         return mustBeChanged;
@@ -47,6 +35,15 @@ public class Equipment {
         this.mustBeChanged = mustBeChanged;
     }
 
+    @Override
+    public String toString() {
+        return "Equipment{" +
+                "typeOfEquipment='" + typeOfEquipment + '\'' +
+                ", id=" + id +
+                ", location='" + location + '\'' +
+                ", mustBeChanged=" + mustBeChanged +
+                '}';
+    }
 
 
 

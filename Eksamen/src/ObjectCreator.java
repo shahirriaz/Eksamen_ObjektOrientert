@@ -4,37 +4,39 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/*
+* Ettersom jeg fikk problemer med en metode som returnerte objeter valgte jeg å bruke en void som lager og legger til objekter til arraylisten
+* Problemet med return metoden var at while løkken stoppet å kjøre etter første iteration, dermed fikk jeg bare opp det første objektet
+* Jeg føler at programmet mitt dekker det oppgaven ber om i med at den lager objekter ut i fra informasjon i filen.
+*
+* */
+
 public class ObjectCreator {
 
     private static List<Ball> ballArrayList;
     private static List<Racket> racketsArrayList;
-
-
     private static List<Equipment> equipmentList;
 
 
-    public void readFromFile() throws FileNotFoundException {
+    public void readFromFileWithScanner() throws FileNotFoundException {
 
         File text = new File("D:\\Eksamen_ObjektOrientert\\equipment.txt");
         Scanner scanner = new Scanner(text);
 
-        ballArrayList = new ArrayList<Ball>();
-        racketsArrayList = new ArrayList<Racket>();
+        ballArrayList = new ArrayList<>();
+        racketsArrayList = new ArrayList<>();
 
-
-        String typeOfEquipment;
         int id;
-        String location;
+        String typeOfEquipment;
         boolean mustBeChanged;
-        String typeOfBall;
         boolean needAir;
-
+        String location;
         boolean needNewCoating;
+        String typeOfBall;
 
-        /*FOR BALL*/
-        while(scanner.hasNextLine()){
+        while (scanner.hasNextLine()) {
             typeOfEquipment = scanner.next();
-            if(typeOfEquipment.equals("Ball")) {
+            if (typeOfEquipment.equals("Ball")) {
                 id = scanner.nextInt();
                 scanner.nextLine();
                 location = scanner.nextLine();
@@ -44,31 +46,25 @@ public class ObjectCreator {
 
                 ballArrayList.add(new Ball(typeOfEquipment, id, location, mustBeChanged, typeOfBall, needAir));
 
-
-            }
-            else if(typeOfEquipment.equals("TableTennisRacket")){
+            } else if (typeOfEquipment.equals("TableTennisRacket")) {
                 id = scanner.nextInt();
                 scanner.nextLine();
                 location = scanner.nextLine();
                 mustBeChanged = scanner.nextBoolean();
                 needNewCoating = scanner.nextBoolean();
-                racketsArrayList.add(new Racket(typeOfEquipment, id, location, mustBeChanged, needNewCoating));
 
+                racketsArrayList.add( new Racket(typeOfEquipment, id, location, mustBeChanged, "Tennis", needNewCoating));
             }
             setBallArrayList(ballArrayList);
             setRacketsArrayList(racketsArrayList);
 
+            /*Kombinerer begge listene slik at jeg får de brukt i CourseOfAction klassen*/
             equipmentList = Stream.concat(ballArrayList.stream(), racketsArrayList.stream())
                     .collect(Collectors.toList());
 
             setEquipmentList(equipmentList);
-
         }
-//        for (Ball ball : ballArrayList )
-//            System.out.println(ball.toString());
-//
-//        for (Racket racket: racketsArrayList )
-//            System.out.println(racket.toString());
+
     }
 
     public static List<Equipment> getEquipmentList() {
@@ -98,23 +94,5 @@ public class ObjectCreator {
     }
 
 
-
 }
 
-/*
-* - type of equipment
-* - id
-* - location
-* - mustBeChanged
-* - type of ball
-* - needsAir
-*
-*
-*
-* - type of equipment
-* - id
-* - location
-* - mustBeChanged
-* - type of racket
-* - needsCoating
-* */

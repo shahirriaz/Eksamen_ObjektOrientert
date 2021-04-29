@@ -1,9 +1,8 @@
 public class Ball extends Equipment{
 
-
-
     String typeOfBall;
     boolean needsAir;
+
 
 
     public Ball(String typeOfEquipment, int id, String location, boolean mustBeChanged, String typeOfBall, boolean needAir) {
@@ -12,6 +11,8 @@ public class Ball extends Equipment{
         this.needsAir = needAir;
 
     }
+
+
 
     public boolean isNeedsAir() {
         return needsAir;
